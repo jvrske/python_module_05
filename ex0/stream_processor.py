@@ -12,12 +12,19 @@ class DataProcessor(ABC):
         pass
 
     def format_output(self, result: str) -> str:
-        pass
+        return f"Output: {result}"
 
 
 class NumericProcessor(DataProcessor):
     def process(self, data) -> str:
-        pass
+        if len(data) > 0:
+            data_len = len(data)
+            data_sum = sum(data)
+            data_avg = data_sum / data_len
+            return f"Processed {data_len} numeric values, \
+sum={data_sum}, avg={data_avg}\n"
+        else:
+            return "Invalid input"
 
     def validate(self, data) -> bool:
         if isinstance(data, list):
@@ -65,3 +72,5 @@ if __name__ == "__main__":
 
     if data1_proc.validate(data1):
         print("Validation: Numeric data verified")
+    data1_final = data1_proc.process(data1)
+    print(data1_proc.format_output(data1_final))
