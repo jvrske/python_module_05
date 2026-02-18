@@ -57,11 +57,12 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
-    def process(self, data):
+    def process(self, data) -> str:
         if "ERROR" in data:
             return "[ALERT] ERROR level detected: Connection timeout"
         if "INFO" in data:
             return "[INFO] INFO level detected: System ready"
+        return None
 
     def validate(self, data):
         if isinstance(data, str):
