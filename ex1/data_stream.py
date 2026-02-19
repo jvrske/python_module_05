@@ -38,7 +38,8 @@ class SensorStream(DataStream):
             return f"{len(data_batch)} readings processed"
         return f"{len(data_batch)} readings processed, avg temp: {temp_result}"
 
-    def filter_data(self, data_batch: List[Any], criteria=None) -> List[Any]:
+    def filter_data(self, data_batch: List[Any],
+                    criteria: Optional[str] = None) -> List[Any]:
         data = []
         for i in data_batch:
             if isinstance(i, dict):
@@ -84,7 +85,8 @@ class TransactionStream(DataStream):
                     net_flow -= value
         return f"{len(data_batch)} operations, net flow: +{net_flow} units"
 
-    def filter_data(self, data_batch: List[Any], criteria=None) -> List[Any]:
+    def filter_data(self, data_batch: List[Any],
+                    criteria: Optional[str] = None) -> List[Any]:
         data2 = []
         for i in data_batch:
             if isinstance(i, dict):
@@ -118,7 +120,8 @@ class EventStream(DataStream):
                 detect_error += 1
         return f"{len(data_batch)} events, {detect_error} error detected"
 
-    def filter_data(self, data_batch: List[Any], criteria=None) -> List[Any]:
+    def filter_data(self, data_batch: List[Any],
+                    criteria: Optional[str] = None) -> List[Any]:
         data3 = []
         for i in data_batch:
             if isinstance(i, str):

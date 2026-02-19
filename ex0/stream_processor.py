@@ -16,7 +16,7 @@ class DataProcessor(ABC):
 
 
 class NumericProcessor(DataProcessor):
-    def process(self, data) -> str:
+    def process(self, data: list) -> str:
         if len(data) > 0:
             data_len = len(data)
             data_sum = sum(data)
@@ -26,7 +26,7 @@ sum={data_sum}, avg={data_avg}\n"
         else:
             return "Invalid input"
 
-    def validate(self, data) -> bool:
+    def validate(self, data: list) -> bool:
         if isinstance(data, list):
             for i in data:
                 if not isinstance(i, int):
@@ -34,17 +34,17 @@ sum={data_sum}, avg={data_avg}\n"
             return True
         return False
 
-    def format_output(self, result):
+    def format_output(self, result: str) -> str:
         return super().format_output(result)
 
 
 class TextProcessor(DataProcessor):
-    def process(self, data):
+    def process(self, data: list) -> str:
         str_len = len(data)
         words_list = len(data.split(" "))
         return f"Processed text: {str_len} characters, {words_list} words"
 
-    def validate(self, data) -> bool:
+    def validate(self, data: list) -> bool:
         if isinstance(data, str):
             for i in data:
                 if not isinstance(i, str):
@@ -52,19 +52,19 @@ class TextProcessor(DataProcessor):
             return True
         return False
 
-    def format_output(self, result):
+    def format_output(self, result: str) -> str:
         return super().format_output(result)
 
 
 class LogProcessor(DataProcessor):
-    def process(self, data) -> str:
+    def process(self, data: list) -> str:
         if "ERROR" in data:
             return "[ALERT] ERROR level detected: Connection timeout"
         if "INFO" in data:
             return "[INFO] INFO level detected: System ready"
         return None
 
-    def validate(self, data):
+    def validate(self, data: list) -> bool:
         if isinstance(data, str):
             for i in data:
                 if not isinstance(i, str):
@@ -72,7 +72,7 @@ class LogProcessor(DataProcessor):
             return True
         return False
 
-    def format_output(self, result):
+    def format_output(self, result: str) -> str:
         return super().format_output(result)
 
 
