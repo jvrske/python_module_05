@@ -100,7 +100,8 @@ class TransformStage():
         if "sum_numeric" in data:
             count = data.get("count_numeric", 0)
             total = data.get("sum_numeric", 0)
-            avg = (total / count) if isinstance(count, int) and count > 0 else 0
+            avg = (total / count) if isinstance(count, int) and \
+                count > 0 else 0
             data["avg"] = avg
             data["metadata"] = {"type": "stream_aggregate"}
             return data
